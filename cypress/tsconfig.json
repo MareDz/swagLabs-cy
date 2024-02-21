@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": ["cypress", "node"]
+  },
+  "include": ["cypress/**/*", "cypress/support/globalCommands.ts", "**/*.ts", "**/*.json"]
+}
