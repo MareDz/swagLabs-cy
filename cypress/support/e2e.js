@@ -14,7 +14,6 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
 import './commands/globalCommands.ts'
 import './commands/loginCommands.ts'
 

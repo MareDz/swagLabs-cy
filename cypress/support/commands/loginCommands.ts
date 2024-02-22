@@ -1,4 +1,3 @@
-import { data } from "cypress/types/jquery"
 import { inventoryUrl, swagTitle } from "../../utils/strings"
 import { login } from "../locators"
 
