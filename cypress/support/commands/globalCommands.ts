@@ -30,7 +30,7 @@ Cypress.Commands.add('assertUrl', value => {
 
 Cypress.Commands.add('clickWhileTrue', (selector) => {
   selector.its('length')
-  .then(count => {
+  .then((count: any) => {
     const countOfElements = count
     cy.log('There are -> ' + countOfElements + " <- Elements") 
     for (let i =1; i<= countOfElements; i++){

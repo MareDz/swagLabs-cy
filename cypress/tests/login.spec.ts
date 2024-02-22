@@ -7,7 +7,7 @@ describe('Login Test Cases', () => {
         cy.launchStore()
     })
 
-    it("Login to store", () => {
+    it("Login to store - Standard User", () => {
         cy.loginToStore()
         cy.logOut()
     })
