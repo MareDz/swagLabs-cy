@@ -7,18 +7,16 @@ declare global {
     interface Chainable<Subject = any> {
       openAndAssertProductDetails(item: string): Chainable<void>
       assertAllProducts(): Chainable<void>
-
     }
   }
 }
 
 /*
--Find desired item/product
--Get displayed price and displayed description
--Open product and verify if name, price and description are all the same as in inventory page
+- Find desired item/product
+- Get displayed price and displayed description
+- Open product and verify if name, price and description are all the same as in inventory page
 */
 Cypress.Commands.add('openAndAssertProductDetails', (item) => {
-  let price: number
 
   cy.log(`Opening product page for: ${item}`);
 
@@ -26,20 +24,23 @@ Cypress.Commands.add('openAndAssertProductDetails', (item) => {
   inventory.lbl_priceByName(item)
     .invoke('text')
     .then(text => {
-        price = Number(text.replace(/\$/g, ''))
-    }).as('getPrice')
+      const price = Number(text.replace(/\$/g, ''))
 
-  // Retrieve name from inventory
-  inventory.lbl_descriptionByName(item)
-    .invoke('text')
-    .as('getDescription')
-      
+      cy.wrap(price)
+        .as('getPrice')
+
+      // Retrieve name from inventory
+      inventory.lbl_descriptionByName(item)
+        .invoke('text')
+        .as('getDescription')
+    })
+
   // Assert data in product details page
-  cy.get('@getPrice').then(() => {
-    cy.get('@getDescription').then((description) => {
+  cy.get('@getDescription').then((description) => {
+    cy.get('@getPrice').then((price) => {
       inventory.btn_itemByName(item).click()
       cy.assertUrl(productDetailsUrl)
-
+  
       product.lbl_productName().should('contain.text', item)
       product.lbl_productDesription().should('have.text', description)
       product.lbl_productPrice()
@@ -53,9 +54,9 @@ Cypress.Commands.add('openAndAssertProductDetails', (item) => {
 })
 
 /*
--Get number of all displayed items 
--Get name for each individual product and push it to array
--Verify content for each item in Inventory and Details page [ For each element of array perform cy.(openAndAssertProductDetails('Name of that product')) ]
+- Get number of all displayed items 
+- Get name for each individual product and push it to array
+- Verify content/value for each item in Inventory and Details page [ For each element of array perform cy.(openAndAssertProductDetails('Name of that product')) ]
 */
 Cypress.Commands.add('assertAllProducts', () => {
   let listOfProducts: string[] = []

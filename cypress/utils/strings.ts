@@ -2,6 +2,7 @@
 export let mainUrl = "saucedemo.com/v1/index.html"
 export let inventoryUrl = "/inventory"
 export let productDetailsUrl = "/inventory-item"
+export let shoppingCartUrl = "/cart"
 
 // Title
 export let swagTitle = "Swag Labs"
