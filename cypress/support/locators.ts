@@ -1,8 +1,7 @@
 export const base = {
     btn_sideMenu: () => cy.get(".bm-burger-button"),
-    lbl_shoppingCart: () => cy.get(".fa-layers-counter"),
+    lbl_shoppingCartNumber: () => cy.get(".fa-layers-counter"),
     btn_shoppingCart: () => cy.get("[data-icon='shopping-cart']"),
-
 }
 
 export const login = {
@@ -27,14 +26,14 @@ export const inventory = {
 export const product = {
     btn_back: () => cy.get(".inventory_details_back_button"),
     btn_addToCart: () => cy.get(".btn_primary").contains('ADD TO CART'),
-    btn_removeFromCart: () => cy.get(".btn_primary").contains("REMOVE"),
+    btn_removeFromCart: () => cy.get(".btn_secondary"),
     lbl_productName: () => cy.get(".inventory_details_name"),
     lbl_productPrice: () => cy.get(".inventory_details_price"),
     lbl_productDesription: () => cy.get(".inventory_details_desc"),
 }
 
 export const cart = {
-    btn_removeFromCart: () => cy.get(".btn_secondary.cart_button").contains('REMOVE'),
+    btn_removeFromCart: () => cy.get(".btn_secondary.cart_button"),
     btn_continueShopping: () => cy.get(".btn_secondary").contains('Continue Shopping'),
     lbl_productName: () => cy.get(".inventory_item_name"),
     lbl_productDescription: () => cy.get(".inventory_item_desc"),
