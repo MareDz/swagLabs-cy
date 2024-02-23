@@ -1,3 +1,5 @@
+import { inventory } from "../support/locators"
+
 describe('Inventory - Shopping Cart Test Cases', () => {
 
     beforeEach(() => {
@@ -10,11 +12,7 @@ describe('Inventory - Shopping Cart Test Cases', () => {
     // })
 
     it('Add item to cart', () => {
-        cy.get(".btn_primary.btn_inventory")
-            .parents('.inventory_item')
-            .find('.inventory_item_label')
-            .contains("Sauce Labs Bolt T-Shirt")
-            .click()
+        cy.openProductByName('Sauce Labs Backpack')
     })
 
 })
