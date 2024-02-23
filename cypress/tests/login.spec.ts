@@ -1,4 +1,3 @@
-import { data } from "cypress/types/jquery"
 import { lbl_lockerUser, lbl_wrongCredentials } from "../utils/strings"
 
 describe('Login Test Cases', () => {

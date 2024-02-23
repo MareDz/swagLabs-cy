@@ -1,5 +1,3 @@
-import { inventory } from "../support/locators"
-
 describe('Inventory - Shopping Cart Test Cases', () => {
 
     beforeEach(() => {
@@ -11,8 +9,9 @@ describe('Inventory - Shopping Cart Test Cases', () => {
     //     cy.logOut()
     // })
 
-    it('Add item to cart', () => {
-        cy.openProductByName('Sauce Labs Backpack')
+    it('Verify product details', () => {
+     //   cy.openAndAssertProductDetails('Sauce Labs Backpack')
+        cy.assertAllProducts()
     })
 
 })
