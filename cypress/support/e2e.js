@@ -16,6 +16,9 @@
 // Import commands.js using ES2015 syntax:
 import './commands/globalCommands.ts'
 import './commands/loginCommands.ts'
+import './commands/inentoryCommands.ts'
+import './commands/cartCommands.ts'
+
 
 
 // Alternatively you can use CommonJS syntax:

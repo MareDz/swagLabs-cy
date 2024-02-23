@@ -35,7 +35,7 @@ Cypress.Commands.add('loginToStoreParams', (username, password) => {
 
 Cypress.Commands.add('errorWrongCredentials', (message) => {
   login.lbl_error().should('contain.text', message)
-  // // just to test Chai
+  // // just to test Chai library
   // login.lbl_error().invoke('text').then(text => {expect(text).to.contain(lbl_wrongCredentials)})
   login.btn_closeError().click()
   login.btn_closeError().should('not.exist')

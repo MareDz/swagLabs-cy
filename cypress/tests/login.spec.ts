@@ -1,4 +1,3 @@
-import { data } from "cypress/types/jquery"
 import { lbl_lockerUser, lbl_wrongCredentials } from "../utils/strings"
 
 describe('Login Test Cases', () => {
@@ -7,7 +6,7 @@ describe('Login Test Cases', () => {
         cy.launchStore()
     })
 
-    it("Login to store", () => {
+    it("Login to store - Standard User", () => {
         cy.loginToStore()
         cy.logOut()
     })
