@@ -12,6 +12,11 @@ declare global {
   }
 }
 
+/*
+-Find desired item/product
+-Get displayed price and displayed description
+-Open product and verify if name, price and description are all the same as in inventory page
+*/
 Cypress.Commands.add('openAndAssertProductDetails', (item) => {
   let price: number
 
@@ -29,7 +34,7 @@ Cypress.Commands.add('openAndAssertProductDetails', (item) => {
     .invoke('text')
     .as('getDescription')
       
-  // Assert details in details
+  // Assert data in product details page
   cy.get('@getPrice').then(() => {
     cy.get('@getDescription').then((description) => {
       inventory.btn_itemByName(item).click()
@@ -44,11 +49,14 @@ Cypress.Commands.add('openAndAssertProductDetails', (item) => {
           expect(price).to.be.eq(productPrice)
         })
       })
-    }).then(() => {
-      product.btn_back().click()
     })
 })
 
+/*
+-Get number of all displayed items 
+-Get name for each individual product and push it to array
+-Verify content for each item in Inventory and Details page [ For each element of array perform cy.(openAndAssertProductDetails('Name of that product')) ]
+*/
 Cypress.Commands.add('assertAllProducts', () => {
   let listOfProducts: string[] = []
 
@@ -67,6 +75,7 @@ Cypress.Commands.add('assertAllProducts', () => {
     console.log(listOfProducts)
     listOfProducts.forEach((productName) => {
       cy.openAndAssertProductDetails(productName)
+      product.btn_back().click()
     })
   })
 })
