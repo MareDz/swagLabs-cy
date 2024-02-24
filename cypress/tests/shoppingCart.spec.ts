@@ -1,4 +1,4 @@
-import { product1 } from "../utils/strings"
+import { product1, product2 } from "../utils/strings"
 
 describe('Shopping Cart Tests', () => {
 
@@ -13,12 +13,12 @@ describe('Shopping Cart Tests', () => {
 
     it('Add and remove item from a cart', () => {
         cy.openAndAssertProductDetails(product1)
-        cy.addAndAssertProductInCart()
+        cy.productDetailsAddToCart()
         cy.removeItemsFromCart()
     })
 
     it('Add and remove all items from a cart', () => {
-        cy.addAllItemsToCart()
+        cy.inventoryAddAllItemsToCart()
         cy.openShoppingCart()
         cy.removeItemsFromCart()
     })
@@ -29,6 +29,40 @@ describe('Shopping Cart Tests', () => {
     })
 })
 
-describe('Ordering Tests', () => {
-    // ADD TESTS FOR ORDERING
+describe('Checkout Tests', () => {
+
+    before(() => {
+        cy.getCheckoutData()
+    })
+
+    beforeEach(() => {
+        cy.launchStore()
+        cy.loginToStore()
+    })
+
+    afterEach(() => {
+        cy.logOut()
+    })
+
+    after(() => {
+        cy.clearJsonValues('checkout')
+    })
+
+    it('Checkout positive', () => {
+        cy.inventoryAddItemToCart(product1)
+        cy.inventoryAddItemToCart(product2)
+        cy.openShoppingCart()
+        cy.proceedToCheckout()
+        cy.fillCheckoutData()
+        cy.continueWithCheckout()
+        cy.finishCheckout()
+    })
+
+    it('Checkout negative', () => {
+        cy.inventoryAddItemToCart(product1)
+        cy.inventoryAddItemToCart(product2)
+        cy.openShoppingCart()
+        cy.proceedToCheckout()
+        cy.errorFillDataCheckout()
+    })
 })

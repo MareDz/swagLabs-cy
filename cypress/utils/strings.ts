@@ -3,6 +3,20 @@ export let mainUrl = "saucedemo.com/v1/index.html"
 export let inventoryUrl = "/inventory"
 export let productDetailsUrl = "/inventory-item"
 export let shoppingCartUrl = "/cart"
+export let checkoutStep1Url = "/checkout-step-one"
+export let checkoutStep2Url = "/checkout-step-two"
+export let checkoutFinishUrl = "/checkout-complete"
+
+// Caption
+export let inventoryCaption = "Products"
+export let shoppingCartCaption = "Your Cart"
+export let checkoutStep1Caption = "Checkout: Your Information"
+export let checkoutStep2Caption = "Checkout: Overview"
+export let checkoutFinishCaption = "Finish"
+export let checkoutFinishTyCaption = "THANK YOU FOR YOUR ORDER"
+export let checkoutMissingZipCaption = "Postal Code is required"
+export let checkoutMissingLastNameCaption = "Last Name is required"
+export let checkoutMissingFirstNameCaption = "First Name is required"
 
 // Title
 export let swagTitle = "Swag Labs"

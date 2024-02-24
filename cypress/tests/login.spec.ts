@@ -14,14 +14,14 @@ describe('Login Test Cases', () => {
     it("Login to store - Invalid Credentials", () => {
         cy.fixture("user.json").then((data) => {
             cy.loginToStoreParams(data.standardUser, "123qwe!@")
-            cy.errorWrongCredentials(lbl_wrongCredentials)
+            cy.loginError(lbl_wrongCredentials)
         })
     })
 
     it("Login to store - Locked Out User", () => {
         cy.fixture("user.json").then((data) => {
             cy.loginToStoreParams(data.lockedUser, data.password)
-            cy.errorWrongCredentials(lbl_lockerUser)
+            cy.loginError(lbl_lockerUser)
         })
     })
 

@@ -1,7 +1,8 @@
 export const base = {
     btn_sideMenu: () => cy.get(".bm-burger-button"),
-    lbl_shoppingCartNumber: () => cy.get(".fa-layers-counter"),
     btn_shoppingCart: () => cy.get("[data-icon='shopping-cart']"),
+    lbl_shoppingCartNumber: () => cy.get(".fa-layers-counter"),
+    lbl_subheader: () => cy.get(".subheader"),
 }
 
 export const login = {
@@ -16,11 +17,14 @@ export const login = {
 
 export const inventory = {
     btn_addToCart: () => cy.get(".btn_primary.btn_inventory"),
-    btn_itemByName: (name: string) =>  cy.get('.inventory_item').find('.inventory_item_label').contains(`${name}`),
-    lbl_priceByName: (name: string) => cy.get('.inventory_item').children('.inventory_item_label').contains(`${name}`).parents('.inventory_item').find('.pricebar').children('.inventory_item_price'),
+    btn_addToCartByName: (name: string) => cy.get('.inventory_item_label').contains(`${name}`).parents('.inventory_item').find('.pricebar').find('button'),
+    btn_itemByName: (name: string) => cy.get('.inventory_item_label').contains(`${name}`),
+    lbl_priceByName: (name: string) => cy.get('.inventory_item_label').contains(`${name}`).parents('.inventory_item').find('.pricebar').children('.inventory_item_price'),
     lbl_descriptionByName: (name: string) => cy.get('.inventory_item').children('.inventory_item_label').contains(`${name}`).next('.inventory_item_desc'),
     lbl_price_Parent: () => cy.get(".inventory_item_price"),
     lbl_itemName_Parent: () => cy.get(".inventory_item_name"),
+    lbl_productCaption: () => cy.get(".product_label"),
+    dd_sorting: () => cy.get('.product_sort_container')
 }
 
 export const product = {
@@ -39,4 +43,17 @@ export const cart = {
     lbl_productDescription: () => cy.get(".inventory_item_desc"),
     lbl_productPrice: () => cy.get('.inventory_item_price'),
     lbl_cartItem: () => cy.get(".cart_item")
+}
+
+export const checkout = {
+    btn_checkout: () => cy.get(".checkout_button"),
+    btn_cancel: () => cy.get(".cart_cancel_link"),
+    btn_continue: () => cy.get(".cart_button[type='submit']"),
+    btn_finish: () => cy.get('.btn_action').contains('FINISH'),
+    inp_firstName: () => cy.get('[data-test="firstName"]'),
+    inp_lastName: () => cy.get('[data-test="lastName"]'),
+    inp_zipCode: () => cy.get('[data-test="postalCode"]'),
+    lbl_thankYou: () => cy.get('.complete-header'),
+    lbl_checkoutError: () => cy.get('[data-test="error"]'),
+    img_ponyExpress: () => cy.get('.pony_express')
 }

@@ -19,7 +19,3 @@ describe('Product Details Tests', () => {
         cy.assertAllProducts()
     })
 })
-
-describe('Sorting Tests', () => {
-    // ADD TESTS FOR SORTING IN INVENTORY PAGE
-})
