@@ -1,3 +1,4 @@
+import { checkSortAscending, checkSortDescending } from "../../utils/helpers"
 import { productDetailsUrl } from "../../utils/strings"
 import { inventory, product } from "../locators"
 
@@ -7,6 +8,7 @@ declare global {
     interface Chainable<Subject = any> {
       openAndAssertProductDetails(item: string): Chainable<void>
       assertAllProducts(): Chainable<void>
+      inventoryPriceSorting(order: string): Chainable<void>
     }
   }
 }
@@ -79,4 +81,38 @@ Cypress.Commands.add('assertAllProducts', () => {
       product.btn_back().click()
     })
   })
+})
+
+/*
+- Give type of sorting
+- Obtain number of elements
+- Loop through each element, get the price, format it and push it to array
+- Import external helpers checkSortAscending() and checkSortDescending() 
+- Verify that sorting is done correctly
+*/
+Cypress.Commands.add('inventoryPriceSorting', (order) => {
+  let numberOfArcticles: number
+  let priceArray: number[] = []
+
+  inventory.dd_sorting().select(order)
+
+  inventory.lbl_price().its('length').then((length) => {
+    numberOfArcticles = length
+  })
+  .then(() => {
+    for(let i = 0; i < numberOfArcticles; i++){
+      inventory.lbl_price().eq(i).invoke('text').then((text) => {
+        const price = Number(text.replace(/\$/g, ''))
+        priceArray.push(price)
+      })
+    }
+  })
+  .then(async () => {
+    if(order === 'Price (low to high)'){
+      expect(await checkSortAscending(priceArray)).to.be.true
+    } else if (order == 'Price (high to low)'){
+      expect(await checkSortDescending(priceArray)).to.be.true
+    }
+  })
+
 })

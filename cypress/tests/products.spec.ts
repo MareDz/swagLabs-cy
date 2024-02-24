@@ -18,4 +18,9 @@ describe('Product Details Tests', () => {
     it('Verify product details for each product', () => {
         cy.assertAllProducts()
     })
+
+    it('Inventory price sorting', () => {
+        cy.inventoryPriceSorting('Price (low to high)')
+        cy.inventoryPriceSorting('Price (high to low)')
+    })
 })
