@@ -1,5 +1,4 @@
 import { product1, product2 } from "../utils/strings"
-import { checkout, inventory } from "../support/locators"
 
 describe('Shopping Cart Tests', () => {
 
@@ -46,7 +45,7 @@ describe('Checkout Tests', () => {
     })
 
     after(() => {
-        cy.clearJsonValues('cypress/fixtures/checkout.json')
+        cy.clearJsonValues('checkout')
     })
 
     it('Checkout positive', () => {
@@ -58,7 +57,6 @@ describe('Checkout Tests', () => {
         cy.continueWithCheckout()
         cy.finishCheckout()
     })
-
 
     it('Checkout negative', () => {
         cy.inventoryAddItemToCart(product1)

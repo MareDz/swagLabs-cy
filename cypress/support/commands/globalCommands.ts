@@ -33,10 +33,10 @@ Cypress.Commands.add('assertUrl', value => {
 /*
 - Update specific value/s for desired json
 */
-Cypress.Commands.add('updateJsonValues', (filePath, updates) => {
-  cy.readFile(filePath).then(content => {
+Cypress.Commands.add('updateJsonValues', (fixtureName, updates) => {
+  cy.fixture(fixtureName).then(content => {
     Object.assign(content, updates)
-    cy.writeFile(filePath, content)
+    cy.writeFile(`cypress/fixtures/${fixtureName}.json`, content)
   })
 })
 
@@ -49,9 +49,6 @@ Cypress.Commands.add('clearJsonValues', fixtureName => {
     cy.writeFile(`cypress/fixtures/${fixtureName}.json`, data)
   })
 })
-
-  // Log the entire response body as a string
-  // cy.log('RESPONSE BODY: ', JSON.stringify(responseBody));
 
 Cypress.Commands.add('getCheckoutData', () => {
   cy.request({
@@ -66,7 +63,10 @@ Cypress.Commands.add('getCheckoutData', () => {
     cy.log("Created laset name: " + responseBody.name.last)
     cy.log("Create zip code: " + responseBody.location.postcode)
 
-    cy.updateJsonValues('cypress/fixtures/checkout.json', {
+    // Log the entire response body as a string
+    // cy.log('RESPONSE BODY: ', JSON.stringify(responseBody));
+
+    cy.updateJsonValues('checkout', {
       firstName: responseBody.name.first,
       lastName: responseBody.name.last,
       zipCode: responseBody.location.postcode

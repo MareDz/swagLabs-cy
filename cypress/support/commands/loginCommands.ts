@@ -1,5 +1,5 @@
-import { inventoryUrl, lbl_wrongCredentials, mainUrl, swagTitle } from "../../utils/strings"
-import { base, login } from "../locators"
+import { inventoryCaption, inventoryUrl, lbl_wrongCredentials, mainUrl, swagTitle } from "../../utils/strings"
+import { base, inventory, login } from "../locators"
 
 export {}
 declare global {
@@ -24,6 +24,7 @@ Cypress.Commands.add('loginToStore', () => {
         login.inp_password().type(data.password)
         login.btn_login().click()
         cy.assertUrl(inventoryUrl)
+        inventory.lbl_productCaption().should('have.text', inventoryCaption)
         cy.title().should('eq', swagTitle)
     })
 })

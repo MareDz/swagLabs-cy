@@ -8,6 +8,7 @@ export let checkoutStep2Url = "/checkout-step-two"
 export let checkoutFinishUrl = "/checkout-complete"
 
 // Caption
+export let inventoryCaption = "Products"
 export let shoppingCartCaption = "Your Cart"
 export let checkoutStep1Caption = "Checkout: Your Information"
 export let checkoutStep2Caption = "Checkout: Overview"
