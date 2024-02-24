@@ -3,7 +3,7 @@
 - [Swag Labs](http://teststore.automationtesting.co.uk/) is demo application and this project is used only for demonstration purpose.
 - This project contains automation tests for mentined application.
 
-- Focus of this project is to demonstrate my **_coding style, Cypress Best Practices Variable Naming Conventions, Code Organization and Organization of Test Cases_**.
+- Focus of this project is to demonstrate my **_Coding style, Cypress Best Practices Variable Naming Conventions, Code Organization and Organization of Test Cases_**.
 
 # Getting Started
 
