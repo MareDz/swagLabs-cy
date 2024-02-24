@@ -41,13 +41,13 @@ describe('Checkout Tests', () => {
         cy.loginToStore()
     })
 
-    // afterEach(() => {
-    //     cy.logOut()
-    // })
+    afterEach(() => {
+        cy.logOut()
+    })
 
-    // after(() => {
-    //     cy.clearJsonValues('cypress/fixtures/checkout.json')
-    // })
+    after(() => {
+        cy.clearJsonValues('cypress/fixtures/checkout.json')
+    })
 
     it('Checkout positive', () => {
         cy.inventoryAddItemToCart(product1)
@@ -60,15 +60,11 @@ describe('Checkout Tests', () => {
     })
 
 
-    it.only('Checkout negative', () => {
+    it('Checkout negative', () => {
         cy.inventoryAddItemToCart(product1)
         cy.inventoryAddItemToCart(product2)
         cy.openShoppingCart()
         cy.proceedToCheckout()
-        cy.fillCheckoutData()
-
-        // cy.continueWithCheckout()
-        // cy.finishCheckout()
+        cy.errorFillDataCheckout()
     })
-    
 })

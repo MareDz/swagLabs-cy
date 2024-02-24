@@ -56,7 +56,7 @@ Cypress.Commands.add('productDetailsCartInteraction', () => {
 })
 
 /*
-- Loop through all items and add them to the cart
+- From inventory page loop through all items and add them to the cart 
 - Verify that aggregated number of items in cart is accurate
 */
 Cypress.Commands.add('inventoryAddAllItemsToCart', () => {
@@ -89,6 +89,9 @@ Cypress.Commands.add('removeItemsFromCart', () => {
   base.lbl_shoppingCartNumber().should('not.exist')
 })
 
+/*
+- From inventory page add specific item to cart
+*/
 Cypress.Commands.add('inventoryAddItemToCart', (item) => {
   inventory.btn_addToCartByName(item).click()
   inventory.btn_addToCartByName(item).should('have.text', 'REMOVE')

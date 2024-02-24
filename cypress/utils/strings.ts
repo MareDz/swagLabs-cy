@@ -13,6 +13,9 @@ export let checkoutStep1Caption = "Checkout: Your Information"
 export let checkoutStep2Caption = "Checkout: Overview"
 export let checkoutFinishCaption = "Finish"
 export let checkoutFinishTyCaption = "THANK YOU FOR YOUR ORDER"
+export let checkoutMissingZipCaption = "Postal Code is required"
+export let checkoutMissingLastNameCaption = "Last Name is required"
+export let checkoutMissingFirstNameCaption = "First Name is required"
 
 // Title
 export let swagTitle = "Swag Labs"

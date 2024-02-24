@@ -52,5 +52,6 @@ export const checkout = {
     inp_lastName: () => cy.get('[data-test="lastName"]'),
     inp_zipCode: () => cy.get('[data-test="postalCode"]'),
     lbl_thankYou: () => cy.get('.complete-header'),
+    lbl_checkoutError: () => cy.get('[data-test="error"]'),
     img_ponyExpress: () => cy.get('.pony_express')
 }
