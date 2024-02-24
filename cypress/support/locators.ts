@@ -47,7 +47,10 @@ export const checkout = {
     btn_checkout: () => cy.get(".checkout_button"),
     btn_cancel: () => cy.get(".cart_cancel_link"),
     btn_continue: () => cy.get(".cart_button[type='submit']"),
+    btn_finish: () => cy.get('.btn_action').contains('FINISH'),
     inp_firstName: () => cy.get('[data-test="firstName"]'),
     inp_lastName: () => cy.get('[data-test="lastName"]'),
     inp_zipCode: () => cy.get('[data-test="postalCode"]'),
+    lbl_thankYou: () => cy.get('.complete-header'),
+    img_ponyExpress: () => cy.get('.pony_express')
 }

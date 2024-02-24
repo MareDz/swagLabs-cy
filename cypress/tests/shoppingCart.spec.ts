@@ -1,5 +1,5 @@
 import { product1, product2 } from "../utils/strings"
-import { inventory } from "../support/locators"
+import { checkout, inventory } from "../support/locators"
 
 describe('Shopping Cart Tests', () => {
 
@@ -32,6 +32,10 @@ describe('Shopping Cart Tests', () => {
 
 describe('Checkout Tests', () => {
 
+    before(() => {
+        cy.getCheckoutData()
+    })
+
     beforeEach(() => {
         cy.launchStore()
         cy.loginToStore()
@@ -41,11 +45,30 @@ describe('Checkout Tests', () => {
     //     cy.logOut()
     // })
 
-    it.only('Checkout', () => {
+    // after(() => {
+    //     cy.clearJsonValues('cypress/fixtures/checkout.json')
+    // })
+
+    it('Checkout positive', () => {
         cy.inventoryAddItemToCart(product1)
         cy.inventoryAddItemToCart(product2)
         cy.openShoppingCart()
         cy.proceedToCheckout()
+        cy.fillCheckoutData()
+        cy.continueWithCheckout()
+        cy.finishCheckout()
+    })
+
+
+    it.only('Checkout negative', () => {
+        cy.inventoryAddItemToCart(product1)
+        cy.inventoryAddItemToCart(product2)
+        cy.openShoppingCart()
+        cy.proceedToCheckout()
+        cy.fillCheckoutData()
+
+        // cy.continueWithCheckout()
+        // cy.finishCheckout()
     })
     
 })
