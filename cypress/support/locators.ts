@@ -23,7 +23,8 @@ export const inventory = {
     lbl_descriptionByName: (name: string) => cy.get('.inventory_item').children('.inventory_item_label').contains(`${name}`).next('.inventory_item_desc'),
     lbl_price_Parent: () => cy.get(".inventory_item_price"),
     lbl_itemName_Parent: () => cy.get(".inventory_item_name"),
-    lbl_productCaption: () => cy.get(".product_label")
+    lbl_productCaption: () => cy.get(".product_label"),
+    dd_sorting: () => cy.get('.product_sort_container')
 }
 
 export const product = {
