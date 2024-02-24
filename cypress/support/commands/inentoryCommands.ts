@@ -14,7 +14,8 @@ declare global {
 /*
 - Find desired item/product
 - Get displayed price and displayed description
-- Open product and verify if name, price and description are all the same as in inventory page
+- Verify that item conten/values are same in Inventory and Product Details page [name, description, price]
+
 */
 Cypress.Commands.add('openAndAssertProductDetails', (item) => {
 

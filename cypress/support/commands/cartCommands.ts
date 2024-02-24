@@ -1,13 +1,14 @@
-import { shoppingCartUrl } from "../../utils/strings"
+import { shoppingCartCaption, shoppingCartUrl } from "../../utils/strings"
 import { base, cart, inventory, product } from "../locators"
 
 export {}
 declare global {
   namespace Cypress {
     interface Chainable<Subject = any> {
-      addAndAssertProductInCart(): Chainable<void>
+      productDetailsAddToCart(): Chainable<void>
       removeItemsFromCart(): Chainable<void>
-      addAllItemsToCart(): Chainable<void>
+      inventoryAddAllItemsToCart(): Chainable<void>
+      inventoryAddItemToCart(item: string): Chainable<void>
       openShoppingCart(): Chainable<void>
       productDetailsCartInteraction(): Chainable<void>
     }
@@ -16,9 +17,9 @@ declare global {
 
 /*
 - Add an item to a cart
-- Verify item conten/values in Details and Cart page  [name, description, price]
+- Verify that item conten/values are same in Details and Cart page [name, description, price]
 */
-Cypress.Commands.add('addAndAssertProductInCart', () => {
+Cypress.Commands.add('productDetailsAddToCart', () => {
   product.lbl_productName().invoke('text').as('getName')
   product.lbl_productDesription().invoke('text').as('getDescription')
   product.lbl_productPrice()
@@ -42,9 +43,38 @@ Cypress.Commands.add('addAndAssertProductInCart', () => {
 })
 
 /*
+- From product details page add and remove item from cart
+- Verify content of dynamic buttons
+- Verify that aggregate number is changing appropriately
+*/
+Cypress.Commands.add('productDetailsCartInteraction', () => {
+  product.btn_addToCart().should('have.text', 'ADD TO CART').click()
+  base.lbl_shoppingCartNumber().should('have.text', 1)
+  product.btn_removeFromCart().should('have.text', 'REMOVE')
+  product.btn_removeFromCart().click()
+  base.lbl_shoppingCartNumber().should('not.exist')
+})
+
+/*
+- Loop through all items and add them to the cart
+- Verify that aggregated number of items in cart is accurate
+*/
+Cypress.Commands.add('inventoryAddAllItemsToCart', () => {
+  inventory.btn_addToCart()
+    .its('length')
+    .then((count) => {
+      const elements = count
+      for (let i=0; i<elements; i++){
+        inventory.btn_addToCart().first().click()
+      }
+      base.lbl_shoppingCartNumber().should('have.text', count)
+    })
+})
+
+/*
 - Remove all items from a cart
 - Verify that no items are in cart
-- Verify that aggregat number of items in cart is not displayed in cart icon
+- Verify that aggregat number of items in cart is not displayed when cart is empty
 */
 Cypress.Commands.add('removeItemsFromCart', () => {
   cart.btn_removeFromCart()
@@ -59,20 +89,9 @@ Cypress.Commands.add('removeItemsFromCart', () => {
   base.lbl_shoppingCartNumber().should('not.exist')
 })
 
-/*
-- Loop through all items and add them to the cart
-- Verify that aggregated number of items in cart is same as added items
-*/
-Cypress.Commands.add('addAllItemsToCart', () => {
-  inventory.btn_addToCart()
-    .its('length')
-    .then((count) => {
-      const elements = count
-      for (let i=0; i<elements; i++){
-        inventory.btn_addToCart().first().click()
-      }
-      base.lbl_shoppingCartNumber().should('have.text', count)
-    })
+Cypress.Commands.add('inventoryAddItemToCart', (item) => {
+  inventory.btn_addToCartByName(item).click()
+  inventory.btn_addToCartByName(item).should('have.text', 'REMOVE')
 })
 
 /*
@@ -81,17 +100,6 @@ Cypress.Commands.add('addAllItemsToCart', () => {
 Cypress.Commands.add('openShoppingCart', () => {
   base.btn_shoppingCart().click()
   cy.assertUrl(shoppingCartUrl)
+  base.lbl_subheader().should('have.text', shoppingCartCaption)
 })
 
-/*
-- From product details page add and remove item from cart
-- Verify content of dynamic buttons
-- Verify that aggregate number is changing appropriately
-*/
-Cypress.Commands.add('productDetailsCartInteraction', () => {
-  product.btn_addToCart().should('have.text', 'ADD TO CART').click()
-  base.lbl_shoppingCartNumber().should('have.text', 1)
-  product.btn_removeFromCart().should('have.text', 'REMOVE')
-  product.btn_removeFromCart().click()
-  base.lbl_shoppingCartNumber().should('not.exist')
-})

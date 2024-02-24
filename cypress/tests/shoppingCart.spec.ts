@@ -1,4 +1,5 @@
-import { product1 } from "../utils/strings"
+import { product1, product2 } from "../utils/strings"
+import { inventory } from "../support/locators"
 
 describe('Shopping Cart Tests', () => {
 
@@ -13,12 +14,12 @@ describe('Shopping Cart Tests', () => {
 
     it('Add and remove item from a cart', () => {
         cy.openAndAssertProductDetails(product1)
-        cy.addAndAssertProductInCart()
+        cy.productDetailsAddToCart()
         cy.removeItemsFromCart()
     })
 
     it('Add and remove all items from a cart', () => {
-        cy.addAllItemsToCart()
+        cy.inventoryAddAllItemsToCart()
         cy.openShoppingCart()
         cy.removeItemsFromCart()
     })
@@ -29,6 +30,22 @@ describe('Shopping Cart Tests', () => {
     })
 })
 
-describe('Ordering Tests', () => {
-    // ADD TESTS FOR ORDERING
+describe('Checkout Tests', () => {
+
+    beforeEach(() => {
+        cy.launchStore()
+        cy.loginToStore()
+    })
+
+    // afterEach(() => {
+    //     cy.logOut()
+    // })
+
+    it.only('Checkout', () => {
+        cy.inventoryAddItemToCart(product1)
+        cy.inventoryAddItemToCart(product2)
+        cy.openShoppingCart()
+        cy.proceedToCheckout()
+    })
+    
 })

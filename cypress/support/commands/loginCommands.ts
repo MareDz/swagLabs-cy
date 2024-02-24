@@ -8,11 +8,14 @@ declare global {
         loginToStore(): Chainable<void>
         loginToStoreParams(username: string, password: string): Chainable<void>
         logOut(): Chainable<void>
-        errorWrongCredentials(message: string): Chainable<void>
+        loginError(message: string): Chainable<void>
     }
   }
 }
 
+/*
+- Login to store with standard user for e2e flow
+*/
 Cypress.Commands.add('loginToStore', () => {
     cy.fixture('user.json').then((data) => {
         login.inp_username().clear()
@@ -25,6 +28,9 @@ Cypress.Commands.add('loginToStore', () => {
     })
 })
 
+/*
+- Login with desired user credentials
+*/
 Cypress.Commands.add('loginToStoreParams', (username, password) => {
     login.inp_username().clear()
     login.inp_username().type(username)
@@ -33,7 +39,7 @@ Cypress.Commands.add('loginToStoreParams', (username, password) => {
     login.btn_login().click()
 })
 
-Cypress.Commands.add('errorWrongCredentials', (message) => {
+Cypress.Commands.add('loginError', (message) => {
   login.lbl_error().should('contain.text', message)
   // // just to test Chai library
   // login.lbl_error().invoke('text').then(text => {expect(text).to.contain(lbl_wrongCredentials)})
