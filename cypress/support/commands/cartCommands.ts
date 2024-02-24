@@ -23,17 +23,17 @@ Cypress.Commands.add('productDetailsAddToCart', () => {
   product.lbl_productName().invoke('text').as('getName')
   product.lbl_productDesription().invoke('text').as('getDescription')
   product.lbl_productPrice()
-        .invoke('text')
-        .then(text => {
-          const price = Number(text.replace(/\$/g, ''))
-          cy.wrap(price).as('getPrice')
-        })
+    .invoke('text')
+    .then(text => {
+      const price = Number(text.replace(/\$/g, ''))
+      cy.wrap(price).as('getPrice')
+    })
 
   cy.get('@getName').then((name) => {
     cy.get('@getDescription').then((description) => {
       cy.get('@getPrice').then((price) => {
         product.btn_addToCart().click()
-         cy.openShoppingCart()
+        cy.openShoppingCart()
         cart.lbl_productName().should('have.text', name)
         cart.lbl_productDescription().should('have.text', description)
         cart.lbl_productPrice().should('have.text', price)
