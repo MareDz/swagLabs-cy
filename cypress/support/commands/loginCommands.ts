@@ -1,4 +1,4 @@
-import { inventoryCaption, inventoryUrl, lbl_wrongCredentials, mainUrl, swagTitle } from "../../utils/strings"
+import { inventoryCaption, inventoryUrl, mainUrl, swagTitle } from "../../utils/strings"
 import { base, inventory, login } from "../locators"
 
 export {}
@@ -42,8 +42,6 @@ Cypress.Commands.add('loginToStoreParams', (username, password) => {
 
 Cypress.Commands.add('loginError', (message) => {
   login.lbl_error().should('contain.text', message)
-  // // just to test Chai library
-  // login.lbl_error().invoke('text').then(text => {expect(text).to.contain(lbl_wrongCredentials)})
   login.btn_closeError().click()
   login.btn_closeError().should('not.exist')
 })

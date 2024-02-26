@@ -116,5 +116,4 @@ Cypress.Commands.add('inventoryPriceSorting', (order) => {
       expect(await checkSortDescending(priceArray)).to.be.true
     }
   })
-
 })
