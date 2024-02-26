@@ -63,22 +63,24 @@ Cypress.Commands.add('openAndAssertProductDetails', (item) => {
 Cypress.Commands.add('assertAllProducts', () => {
   let listOfProducts: string[] = []
 
-  inventory.lbl_itemName_Parent().its('length').then((numberOfProducts) => {
-    console.log(numberOfProducts)
+  inventory.lbl_itemName_Parent().its('length')
+    .then((numberOfProducts) => {
+        console.log(numberOfProducts)
 
-    for(let i=0; i<numberOfProducts; i++){
-      inventory.lbl_itemName_Parent()
-      .eq(i)
-      .invoke('text')
-      .then((productName) => {
-        listOfProducts.push(productName)
+      for(let i=0; i<numberOfProducts; i++){
+        inventory.lbl_itemName_Parent()
+          .eq(i)
+          .invoke('text')
+          .then((productName) => {
+            listOfProducts.push(productName)
+          })
+        }
       })
-    }
-  }).then(() => {
-    console.log(listOfProducts)
-    listOfProducts.forEach((productName) => {
-      cy.openAndAssertProductDetails(productName)
-      product.btn_back().click()
+      .then(() => {
+        console.log(listOfProducts)
+        listOfProducts.forEach((productName) => {
+        cy.openAndAssertProductDetails(productName)
+        product.btn_back().click()
     })
   })
 })
@@ -114,5 +116,4 @@ Cypress.Commands.add('inventoryPriceSorting', (order) => {
       expect(await checkSortDescending(priceArray)).to.be.true
     }
   })
-
 })

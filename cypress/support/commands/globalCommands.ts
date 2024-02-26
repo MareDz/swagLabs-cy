@@ -15,19 +15,19 @@ declare global {
 }
 
 Cypress.Commands.add('launchStore', () => {
-    cy.visit("/index.html")
-    cy.assertUrl(mainUrl)
+  cy.visit("/index.html")
+  cy.assertUrl(mainUrl)
 })
 
 Cypress.Commands.add('checkCheckbox', selector => {
   selector
-  .check({ force: true })
-  .should('be.checked')
+    .check({ force: true })
+    .should('be.checked')
 })
 
 Cypress.Commands.add('assertUrl', value => {
   cy.url()
-  .should('include', value)
+    .should('include', value)
 })
 
 /*
@@ -52,8 +52,8 @@ Cypress.Commands.add('clearJsonValues', fixtureName => {
 
 Cypress.Commands.add('getCheckoutData', () => {
   cy.request({
-      method: 'GET',
-      url: 'https://randomuser.me/api/?password=7-13',
+    method: 'GET',
+    url: 'https://randomuser.me/api/?password=7-13',
   })
   .then((response) => {
     const responseBody = response.body.results[0]
