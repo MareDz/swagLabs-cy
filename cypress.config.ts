@@ -3,8 +3,8 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   projectId: "pm4jhx",
 
-  // viewportHeight: 1080,
-  // viewportWidth: 1920,
+  viewportHeight: 1080,
+  viewportWidth: 1920,
 
   e2e: {
     baseUrl: "https://www.saucedemo.com/v1",
