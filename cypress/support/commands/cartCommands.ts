@@ -64,10 +64,11 @@ Cypress.Commands.add('inventoryAddAllItemsToCart', () => {
     .its('length')
     .then((count) => {
       const elements = count
+      // for this component, we're not using cy.each(), on prupose for demo to have all approaches
       for (let i=0; i<elements; i++){
         inventory.btn_addToCart().first().click()
       }
-      base.lbl_shoppingCartNumber().should('have.text', count)
+      base.lbl_shoppingCartNumber().should('have.text', elements)
     })
 })
 
@@ -78,12 +79,8 @@ Cypress.Commands.add('inventoryAddAllItemsToCart', () => {
 */
 Cypress.Commands.add('removeItemsFromCart', () => {
   cart.btn_removeFromCart()
-    .its('length')
-    .then((count) => {
-      const elements = count
-      for(let i=0; i<elements; i++){
-        cart.btn_removeFromCart().first().click()
-      }
+    .each(() => {
+      cart.btn_removeFromCart().first().click()
     })
   cart.lbl_cartItem().should('not.exist')
   base.lbl_shoppingCartNumber().should('not.exist')
