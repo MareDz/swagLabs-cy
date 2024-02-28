@@ -104,7 +104,7 @@ Cypress.Commands.add('inventoryPriceSorting', (order) => {
   .then(async () => {
     if(order === 'Price (low to high)'){
       expect(await checkSortAscending(priceArray)).to.be.true
-    } else if (order == 'Price (high to low)'){
+    } else if (order === 'Price (high to low)'){
       expect(await checkSortDescending(priceArray)).to.be.true
     }
   })
