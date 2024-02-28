@@ -63,24 +63,19 @@ Cypress.Commands.add('openAndAssertProductDetails', (item) => {
 Cypress.Commands.add('assertAllProducts', () => {
   let listOfProducts: string[] = []
 
-  inventory.lbl_itemName_Parent().its('length')
-    .then((numberOfProducts) => {
-        console.log(numberOfProducts)
-
-      for(let i=0; i<numberOfProducts; i++){
-        inventory.lbl_itemName_Parent()
-          .eq(i)
-          .invoke('text')
-          .then((productName) => {
-            listOfProducts.push(productName)
-          })
-        }
+  inventory.lbl_itemName_Parent().each(($el, index, $list) => {
+    inventory.lbl_itemName_Parent()
+      .eq(index)
+      .invoke('text')
+      .then((productName) => {
+        listOfProducts.push(productName)
       })
-      .then(() => {
-        console.log(listOfProducts)
-        listOfProducts.forEach((productName) => {
-        cy.openAndAssertProductDetails(productName)
-        product.btn_back().click()
+    })
+    .then(() => {
+      console.log(listOfProducts)
+      listOfProducts.forEach((productName) => {
+      cy.openAndAssertProductDetails(productName)
+      product.btn_back().click()
     })
   })
 })
@@ -93,21 +88,18 @@ Cypress.Commands.add('assertAllProducts', () => {
 - Verify that sorting is done correctly
 */
 Cypress.Commands.add('inventoryPriceSorting', (order) => {
-  let numberOfArcticles: number
   let priceArray: number[] = []
 
   inventory.dd_sorting().select(order)
 
-  inventory.lbl_price().its('length').then((length) => {
-    numberOfArcticles = length
-  })
-  .then(() => {
-    for(let i = 0; i < numberOfArcticles; i++){
-      inventory.lbl_price().eq(i).invoke('text').then((text) => {
+  inventory.lbl_price().each(($el, index, $list) => {
+    inventory.lbl_price()
+      .eq(index)
+      .invoke('text')
+      .then((text) => {
         const price = Number(text.replace(/\$/g, ''))
         priceArray.push(price)
       })
-    }
   })
   .then(async () => {
     if(order === 'Price (low to high)'){
