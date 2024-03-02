@@ -20,10 +20,11 @@
 
 # General
 
-- Tests for execution are located at [tests]([https://github.com/MareDz/mystore-pw-ts/tree/main/tests](https://github.com/MareDz/swagLabs-cypress/tree/main/cypress/tests)) directory.
-- Cypress Commands are located at [commands](https://github.com/MareDz/swagLabs-cypress/tree/main/cypress/support/commands) directory.
+- Tests for execution are located at [cypress/tests]([https://github.com/MareDz/mystore-pw-ts/tree/main/tests](https://github.com/MareDz/swagLabs-cypress/tree/main/cypress/tests)) directory.
+- Cypress Commands are located at [support/commands](https://github.com/MareDz/swagLabs-cypress/tree/main/cypress/support/commands) directory.
 - Commands that are used in multiple different places, we're keeping in [commands/globalCommands.ts](https://github.com/MareDz/swagLabs-cypress/blob/main/cypress/support/commands/globalCommands.ts) file.
-- Locators are located at [locators.ts](https://github.com/MareDz/swagLabs-cypress/blob/main/cypress/support/locators.ts) file. Considering that this application is realy small, we're keeping locators in only one file to keep it simpler.
+- Locators are located at [support/locators.ts](https://github.com/MareDz/swagLabs-cypress/blob/main/cypress/support/locators.ts) file. Considering that this application is realy small, we're keeping locators in only one file to keep it simpler.
 - Locators that are used in multiple different places, we're keeping in [base] object.
 - Strings used for assertion are located at [utils/strings.ts](https://github.com/MareDz/swagLabs-cypress/blob/main/cypress/utils/strings.ts) file.
 - External helper functions are stored at [utils/helpers.ts](https://github.com/MareDz/swagLabs-cypress/blob/main/cypress/utils/helpers.ts) file.
+- Scripts for running individual specs, are located at [package.json/scripts](https://github.com/MareDz/swagLabs-cypress/blob/main/package.json) file.
