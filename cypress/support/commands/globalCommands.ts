@@ -62,10 +62,7 @@ Cypress.Commands.add('getCheckoutData', () => {
     cy.log("Created first name: " + responseBody.name.first)
     cy.log("Created laset name: " + responseBody.name.last)
     cy.log("Create zip code: " + responseBody.location.postcode)
-
-    // Log the entire response body as a string
-    // cy.log('RESPONSE BODY: ', JSON.stringify(responseBody));
-
+    
     cy.updateJsonValues('checkout', {
       firstName: responseBody.name.first,
       lastName: responseBody.name.last,
