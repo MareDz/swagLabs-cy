@@ -9,18 +9,14 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      matrix:
+        script: ['test:login', 'test:products']  # Define the scripts to run in parallel
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          record: true
-          parallel: true
-          group: 'Actions example'
-          ci-build-id: '${{ github.run_id }}-${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
+      - name: Run Cypress tests
+        run: npm run ${{ matrix.script }}  # Run the specified script in parallel
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
