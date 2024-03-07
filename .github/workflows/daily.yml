@@ -1,26 +1,26 @@
-# name: e2e-tests
+name: e2e-tests
 
-# on:
-#   schedule:
-#     - cron: '0 0 * * *'
-#   workflow_dispatch:
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
-# jobs:
-#   cypress-run:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       fail-fast: false
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v4
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-#       - name: Cypress run
-#         uses: cypress-io/github-action@v6
-#         with:
-#           record: true
-#           parallel: true
-#           group: 'Actions example'
-#           ci-build-id: '${{ github.run_id }}-${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
-#         env:
-#           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-#           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          record: true
+          parallel: true
+          group: 'Actions example'
+          ci-build-id: '${{ github.run_id }}-${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
