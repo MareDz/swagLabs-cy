@@ -1,4 +1,4 @@
-name: e2e-tests
+name: paralel test
 
 on:
   schedule:
