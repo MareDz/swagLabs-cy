@@ -1,0 +1,24 @@
+name: parallelScripts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        script: ['test:login', 'test:products']
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npm run ${{ matrix.script }}
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

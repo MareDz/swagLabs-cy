@@ -1,4 +1,4 @@
-name: parallel
+name: e2e-tests
 
 on:
   schedule:
@@ -9,17 +9,18 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        script: ['test:login', 'test:products']
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: npm install  # Install dependencies using npm
-
-      - name: Run Cypress tests
-        run: npm run ${{ matrix.script }}
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          record: true
+          parallel: true
+          group: 'Actions example'
+          ci-build-id: '${{ github.run_id }}-${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
